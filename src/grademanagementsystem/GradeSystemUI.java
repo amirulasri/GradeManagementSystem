@@ -516,7 +516,7 @@ public class GradeSystemUI extends javax.swing.JFrame {
                 if (selectedStudent == null) {
                     throw new StudentNotFoundException();
                 }
-                JOptionPane.showMessageDialog(null, "Student ID: " + selectedStudent.getStudentID() + "\nStudent Name: " + selectedStudentIDs);
+                JOptionPane.showMessageDialog(null, "Student ID: " + selectedStudent.getStudentID() + "\nStudent Name: " + selectedStudent.getStudentName());
 
                 StringBuilder message = new StringBuilder("Course List:\n");
                 for (Course course : GradeManagementSystem.studentList.get(studentIndexSelect).getListEnrolledCourse()) {
@@ -562,7 +562,7 @@ public class GradeSystemUI extends javax.swing.JFrame {
                 if (selectedStudent == null) {
                     throw new StudentNotFoundException();
                 }
-                JOptionPane.showMessageDialog(null, "Student ID: " + selectedStudent.getStudentID() + "\nStudent Name: " + selectedStudentIDs);
+                JOptionPane.showMessageDialog(null, "Student ID: " + selectedStudent.getStudentID() + "\nStudent Name: " + selectedStudent.getStudentName());
 
                 // COURSE SELECTION
                 String[] courseCodes = new String[GradeManagementSystem.studentList.get(studentIndexSelect).getListEnrolledCourse().size()];
@@ -573,7 +573,7 @@ public class GradeSystemUI extends javax.swing.JFrame {
                 // Create a JComboBox with course codes
                 JComboBox<String> comboBox2 = new JComboBox<>(courseCodes);
                 // Display JOptionPane dialog with the JComboBox
-                int selectorCourseCode = JOptionPane.showConfirmDialog(null, comboBox2, "Select a Course Code to enroll", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int selectorCourseCode = JOptionPane.showConfirmDialog(null, comboBox2, "Select a Course Code to unenroll", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 // Check if the user selected OK
                 if (selectorCourseCode == JOptionPane.OK_OPTION) {

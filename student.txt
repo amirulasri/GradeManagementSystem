@@ -1,5 +1,12 @@
-Student: Amirul | AM123
+Student: Aliah Rusdi | AM2311015241
 Course registered with grade:
+CM201 - 3D Animation
+Grade: 100 - A
+
+Student: Amirul Asri | AM2107009004
+Course registered with grade:
+CT204 - Computer Application Development
+Grade: 80 - B
 CT206 - Cyber Security
-Grade: 70 - C
+Grade: 100 - A
 
