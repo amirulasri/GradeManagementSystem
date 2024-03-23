@@ -8,7 +8,14 @@ import javax.swing.JOptionPane;
 import GradeException.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 /**
@@ -420,12 +427,20 @@ public class GradeSystemUI extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // READ COURSE FROM TXT FILE
         try {
-            File courseFile = new File("course.txt");
+            FileReader courseFile = new FileReader("course.txt");
             Scanner scanner = new Scanner(courseFile);
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
-                System.out.println(data);
+                StringTokenizer courseData = new StringTokenizer(data, ",");
+                if(courseData.countTokens() == 3){
+                    String courseCode = courseData.nextToken();
+                    String courseName = courseData.nextToken();
+                    int courseCredit = Integer.parseInt(courseData.nextToken());
+                    GradeManagementSystem.courseAvailable.add(new Course(courseCode, courseName, courseCredit));
+                }
             }
+            JOptionPane.showMessageDialog(null, "All course from txt file added", "File import", JOptionPane.INFORMATION_MESSAGE);
+            jButton7.setEnabled(false);
             scanner.close();
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error open txt file", JOptionPane.ERROR_MESSAGE);
@@ -433,7 +448,25 @@ public class GradeSystemUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // SAVE STUDENT TO FILE
+            PrintWriter writer = new PrintWriter(new FileWriter("student.txt"));
+            int studentIndex = 0;
+            for(Student eachstudent : GradeManagementSystem.studentList){
+                writer.println("Student: " + eachstudent.getStudentName() + " | " + eachstudent.getStudentID());
+                writer.println("Course registered with grade:");
+                for(Course eachcourseregistered : GradeManagementSystem.studentList.get(studentIndex).getListEnrolledCourse()){
+                    writer.println(eachcourseregistered.getCourseCode() + " - " + eachcourseregistered.getCourseName());
+                    writer.println("Grade: " + eachcourseregistered.getCourseGrade() + " - " + eachcourseregistered.getCourseGrade());
+                }
+                writer.println("");
+                studentIndex++;
+            }
+            JOptionPane.showMessageDialog(null, "All student data saved successfully", "Save student to txt file", JOptionPane.INFORMATION_MESSAGE);
+            writer.close();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error saving student data", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -444,7 +477,7 @@ public class GradeSystemUI extends javax.swing.JFrame {
             }
             StringBuilder message = new StringBuilder("Course List:\n");
             for (Course course : GradeManagementSystem.courseAvailable) {
-                message.append("Code: ").append(course.getCourseCode()).append("\nName: ").append(course.getCourseName()).append("\n\n");
+                message.append("Code: ").append(course.getCourseCode()).append("\nName: ").append(course.getCourseName()).append("\nCredits: ").append(course.getCourseCredits()).append("\n\n");
             }
             JOptionPane.showMessageDialog(null, message.toString());
         } catch (Exception ex) {
@@ -489,7 +522,7 @@ public class GradeSystemUI extends javax.swing.JFrame {
 
                 StringBuilder message = new StringBuilder("Course List:\n");
                 for (Course course : GradeManagementSystem.studentList.get(studentIndexSelect).getListEnrolledCourse()) {
-                    message.append("Code: ").append(course.getCourseCode()).append("\nName: ").append(course.getCourseName()).append("\n\n");
+                    message.append("Code: ").append(course.getCourseCode()).append("\nName: ").append(course.getCourseName()).append("\nCredits: ").append(course.getCourseCredits()).append("\nGrade %: ").append(course.getCourseGrade()).append("\nGrade: ").append(course.getCourseGrade()).append("\n\n");
                 }
                 JOptionPane.showMessageDialog(null, message.toString());
             } catch (Exception ex) {

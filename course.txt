@@ -1,0 +1,5 @@
+CT203,Business Computing,40
+CT204,Computer Application Development,40
+CT206,Cyber Security,39
+CC101,Diploma In Computer Science,34
+CM201,3D Animation,30

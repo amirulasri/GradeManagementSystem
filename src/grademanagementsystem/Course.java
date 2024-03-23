@@ -24,7 +24,7 @@ public class Course implements GradingSystem{
     public Course(String courseCode, String name, int credits) {
         this.courseCode = courseCode;
         this.name = name;
-        this.credits = 0;
+        this.credits = credits;
         this.grades = 0;
     }
 
