@@ -6,7 +6,6 @@ package grademanagementsystem;
 
 import javax.swing.JOptionPane;
 import GradeException.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,8 +13,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 /**
@@ -361,6 +358,7 @@ public class GradeSystemUI extends javax.swing.JFrame {
                     // Input Course credits
                     String courseGPA = JOptionPane.showInputDialog("Enter Course GPA in %:");
                     selectedCourse.setCourseGrade(Integer.parseInt(courseGPA));
+                    selectedCourse.calculateGrade();
                     GradeManagementSystem.studentList.get(studentIndexSelect).getListEnrolledCourse().add(selectedCourse);
                     JOptionPane.showMessageDialog(null, "Student enrolled successfully", selectedStudentIDs, JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -457,7 +455,7 @@ public class GradeSystemUI extends javax.swing.JFrame {
                 writer.println("Course registered with grade:");
                 for(Course eachcourseregistered : GradeManagementSystem.studentList.get(studentIndex).getListEnrolledCourse()){
                     writer.println(eachcourseregistered.getCourseCode() + " - " + eachcourseregistered.getCourseName());
-                    writer.println("Grade: " + eachcourseregistered.getCourseGrade() + " - " + eachcourseregistered.getCourseGrade());
+                    writer.println("Grade: " + eachcourseregistered.getCourseGrade() + " - " + eachcourseregistered.getGrade());
                 }
                 writer.println("");
                 studentIndex++;
@@ -522,7 +520,7 @@ public class GradeSystemUI extends javax.swing.JFrame {
 
                 StringBuilder message = new StringBuilder("Course List:\n");
                 for (Course course : GradeManagementSystem.studentList.get(studentIndexSelect).getListEnrolledCourse()) {
-                    message.append("Code: ").append(course.getCourseCode()).append("\nName: ").append(course.getCourseName()).append("\nCredits: ").append(course.getCourseCredits()).append("\nGrade %: ").append(course.getCourseGrade()).append("\nGrade: ").append(course.getCourseGrade()).append("\n\n");
+                    message.append("Code: ").append(course.getCourseCode()).append("\nName: ").append(course.getCourseName()).append("\nCredits: ").append(course.getCourseCredits()).append("\nGrade %: ").append(course.getCourseGrade()).append("\nGrade: ").append(course.getGrade()).append("\n\n");
                 }
                 JOptionPane.showMessageDialog(null, message.toString());
             } catch (Exception ex) {

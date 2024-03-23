@@ -8,11 +8,13 @@ package grademanagementsystem;
  *
  * @author amiru
  */
-public class Course implements GradingSystem{
+public class Course implements GradingSystem {
+
     private String courseCode;
     private String name;
     private int credits;
     private int grades;
+    private char gradeGPA;
 
     // CONTRUCTOR
     public Course(String courseCode, String name, int credits, int grades) {
@@ -21,6 +23,7 @@ public class Course implements GradingSystem{
         this.credits = credits;
         this.grades = grades;
     }
+
     public Course(String courseCode, String name, int credits) {
         this.courseCode = courseCode;
         this.name = name;
@@ -64,15 +67,31 @@ public class Course implements GradingSystem{
 
     @Override
     public double calculateGrade() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'calculateGrade'");
+        // CALCULATE GRADE HERE
+        if (this.grades >= 90) {
+            this.gradeGPA = 'A';
+            return 'A';
+        } else if (this.grades >= 80) {
+            this.gradeGPA = 'B';
+            return 'B';
+        } else if (this.grades >= 70) {
+            this.gradeGPA = 'C';
+            return 'C';
+        } else if (this.grades >= 60) {
+            this.gradeGPA = 'D';
+            return 'D';
+        } else if (this.grades >= 50) {
+            this.gradeGPA = 'E';
+            return 'E';
+        } else {
+            this.gradeGPA = 'F';
+            return 'F';
+        }
     }
 
     @Override
     public char getGrade() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGrade'");
+        return this.gradeGPA;
     }
 
 }
-

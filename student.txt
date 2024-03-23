@@ -1,15 +1,5 @@
-Student: Babyyyy | AM2107009004
-Course registered with grade:
-CT203 - Business Computing
-Grade: 90 - 90
-CT204 - Computer Application Development
-Grade: 100 - 100
-
-Student: Amirul Asri | AM12345678
-Course registered with grade:
-
-Student: OK | AM2468
+Student: Amirul | AM123
 Course registered with grade:
 CT206 - Cyber Security
-Grade: 90 - 90
+Grade: 70 - C
 
